@@ -1,0 +1,20 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": ["plugins/cdxd"],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "cdxd": {
+            "outputSourceFiles": true
+        }
+    },
+	"opts": {
+		"template": "templates/cdxd"
+	}
+}
