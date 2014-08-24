@@ -1,10 +1,11 @@
 cdxd
 ====
 
-A JSDoc Template &amp; Plugin to implement "Code Driven <X> Documentation" concepts (review it at [my site] (http://josemacchi.wordpress.com). Sorry, spanish for now !
+A JSDoc Template &amp; Plugin to implement "Code Driven <X> Documentation" concepts (review it at [my site] (http://josemacchi.wordpress.com) ). Sorry, spanish for now !
 
 These plugin & template depends on:
 * [JSDoc](https://github.com/jsdoc3/jsdoc)
+* [js-sequence-diagrams] (http://bramp.github.io/js-sequence-diagrams/)
 
 ## About
 
