@@ -44,8 +44,8 @@ Steps:
 	...
 ```
 
-5. Once you have enabled the plugin, then you only need to call JSDoc as usual 
-  (a sample cmd-line is provided at run-test file with a reference to test folder, with a simple sequence diagram annotated)
+Once you have enabled the plugin, then you only need to call JSDoc as usual 
+(a sample cmd-line is provided at run-test file with a reference to test folder, with a simple sequence diagram annotated)
 
 ## Basic Usage
 
