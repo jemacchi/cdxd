@@ -9,7 +9,8 @@ These plugin & template depends on:
 
 ## About
 
-This tools implements the concepts/ideas related to CDxD. Basically, following ideas like TDD, CDxD was developed. It implies something as simple as deliver documentation based on the code, specifically documented when coding stage and by coders/programmers. 
+These tools implements the concepts/ideas related to CDxD. Basically, CDxD was developed following ideas like TDD. 
+It implies something as simple as deliver documentation based on the code, specifically documented when coding stage and by coders/programmers. 
 All of us, as it professional knows that documentation is a task that usually it's avoided, since it's far away from real code implementation, so the idea is to keep documentation (at all stages) as closer to code as possible.
 CDxD concept is about communicating what it's related to a project, as close to code as possible, using diagrams/texts/charts/etc. 
 CDxD means Code Driven <x> Documentation, where <x> could be software design, architectural, test cases, user stories or anything that it's part of the project and requires to be properly registered/versioned/tracked/communicated/shared between members of the project.
