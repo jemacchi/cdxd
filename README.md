@@ -21,7 +21,8 @@ Tools included on this repo are :
 
 ## Installation
 
-Steps: 
+Steps:
+
 1. Install JSDoc3 
 2. Include plugin/cdxd.js file inside JSDoc plugins folder
 3. Add cdxd template folder inside of JSDoc templates folder
