@@ -25,6 +25,12 @@ Tools included on this repo are :
 * A plugin that allows to add specific doclets ( @elements :P ) to your javadoc-like documentation on code,
 * A template that allows to use those specific doclets to generate documentation (like charts/diagrams/other stuff)
 
+## Demo
+
+This is a demo of template & plugin use, to get defined a simple sequence chart (based on doclets)
+
+* [Sequence Chart Demo] (http://cdxd.netne.net/sequence-SequenceDiagram1.html)
+
 ## Installation
 
 Steps:
