@@ -72,8 +72,9 @@ exports.defineTags = function(dictionary) {
 	});
 	// Sequence diagrams
 	dictionary.defineTag('cdxd.call', {
-		onTagged: function(doclet, tag) {
+		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
+			var message = tag.value.substring(tag.value.indexOf("'"));
 			if (!doclet._charts) 
 				doclet._charts = {};
 			doclet._chartRelated = true;
@@ -88,10 +89,37 @@ exports.defineTags = function(dictionary) {
 				doclet._charts["sequence-"+params[0]]._data = {};
 			var msg = {
 					'_order': params[1],
-					'_message': params[2],
-					'_destination': params[3]
+					'_message': message,
+					'_destination': params[2],
+					'_type': 'call'
 			};
 			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
 		}
-	});	
+	});
+	// Sequence diagrams
+	dictionary.defineTag('cdxd.callback', {
+		onTagged: function(doclet, tag) {	
+			var params = tag.value.split(" ");
+			var message = tag.value.substring(tag.value.indexOf("'"));
+			if (!doclet._charts) 
+				doclet._charts = {};
+			doclet._chartRelated = true;
+			if (!doclet._charts["sequence-"+params[0]]) {
+				doclet._charts["sequence-"+params[0]] = {
+					'_chartId': params[0],
+					'_chartName': params[0],
+					'_chartType': "sequence"
+				};
+			}
+			if (!doclet._charts["sequence-"+params[0]]._data) 
+				doclet._charts["sequence-"+params[0]]._data = {};
+			var msg = {
+					'_order': params[1],
+					'_message': message,
+					'_destination': params[2],
+					'_type': 'callback'
+			};
+			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
+		}
+	});
 }

@@ -458,7 +458,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     
     var members = helper.getMembers(data);
     members.tutorials = tutorials.children;
-	
+	//console.log(data);
 	// INIT: Diagrams code
 	members.diagrams = helper.find(data, {_chartRelated: true});
 	if (members.diagrams.length) {
@@ -595,7 +595,10 @@ exports.publish = function(taffyData, opts, tutorials) {
 		    var size = Object.keys(msg).length;
 			for (var i = 0; i < size; i++) {
 				var m = msg[i+""];
-				var s = m._origin + "->" + m._destination + ": " + m._message + "\\n";
+				var type = "->" ;
+				if (m._type == "callback") 
+					type = "-->"
+				var s = m._origin + type + m._destination + ": " + m._message + "\\n";
 				convertedString += s;
 			};
 		};

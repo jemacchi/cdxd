@@ -61,27 +61,31 @@ Once you have enabled the plugin, then you only need to call JSDoc as usual
 
 ## Basic Usage
 
-Currently only Sequence Diagrams are fully implemented, that means that you can use doclet @cdxd.call on your code as this 
+Currently only Sequence Diagrams are fully implemented, that means that you can use doclet @cdxd.call & @cdxd.callback on your code as this 
 
 ```javascript
 
       /**
-       * Second call request.
-	   * @cdxd.call SequenceDiagram1 1 EndCall SampleBClass
-       * @cdxd.call SequenceDiagram1 3 FinalCall SampleBClass	   
+       * First call response.
+	   * @cdxd.callback SequenceDiagram1 2 SampleAClass 'Message 2'
+	   * @cdxd.call SequenceDiagram1 4 SampleCClass 'Message 4'
        */
-      secondRequest: function(fx) {
+      firstResponse: function(fx) {
         return null;
       }
 	  
 ```
 
-where doclet arguments are :
+Implemented doclets:
+* @cdxd.call --> Call
+* @cdxd.callback --> Callback (dotted line)
+
+where doclets arguments are :
 
 * diagram code (ie. SequenceDiagram1)
 * call order number  (ie. 3)
-* message text  (ie. EndCall)
 * entity/class destination  (ie. SampleBClass)
+* message text (required to be enclosed in quotation marks) (ie. 'Message 2')
 
 Doclet assumes the entity source as the current memberof property of the doclet (that means that uses the class definition).
 

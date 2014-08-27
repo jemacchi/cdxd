@@ -30,8 +30,8 @@ define([
 
       /**
        * First call response.
-	   * @cdxd.call SequenceDiagram1 2 Callback SampleAClass
-	   * @cdxd.call SequenceDiagram1 4 Another SampleCClass
+	   * @cdxd.callback SequenceDiagram1 2 SampleAClass 'Message 2'
+	   * @cdxd.call SequenceDiagram1 4 SampleCClass 'Message 4'
        */
       firstResponse: function(fx) {
         return null;

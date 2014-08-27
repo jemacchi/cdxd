@@ -30,15 +30,15 @@ define([
 
       /**
        * First call request.
-	   * @cdxd.call SequenceDiagram1 0 InitialCall SampleAClass
+	   * @cdxd.call SequenceDiagram1 0 SampleDClass 'Message 0'
        */
       firstRequest: function(fx) {
         return null;
       },
       /**
        * Second call request.
-	   * @cdxd.call SequenceDiagram1 1 EndCall SampleBClass
-       * @cdxd.call SequenceDiagram1 3 FinalCall SampleBClass	   
+	   * @cdxd.call SequenceDiagram1 1 SampleBClass 'Message 1'
+       * @cdxd.call SequenceDiagram1 3 SampleBClass 'Message 3'
        */
       secondRequest: function(fx) {
         return null;
