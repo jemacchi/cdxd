@@ -31,6 +31,7 @@ define([
       /**
        * First call request.
 	   * @cdxd.call SequenceDiagram1 0 SampleDClass 'Message 0'
+	   * @cdxd.note SequenceDiagram1 5 over 'This is a simple note'
        */
       firstRequest: function(fx) {
         return null;

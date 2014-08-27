@@ -458,7 +458,6 @@ exports.publish = function(taffyData, opts, tutorials) {
     
     var members = helper.getMembers(data);
     members.tutorials = tutorials.children;
-	//console.log(data);
 	// INIT: Diagrams code
 	members.diagrams = helper.find(data, {_chartRelated: true});
 	if (members.diagrams.length) {
@@ -471,9 +470,6 @@ exports.publish = function(taffyData, opts, tutorials) {
 						var anUrl = helper.getUniqueFilename(g._charts[c]._chartType+'-'+g._charts[c]._chartName);
 						helper.registerLink(g._charts[c]._chartType+'-'+g._charts[c]._chartName, anUrl);
 						var entities = [];
-						entities.push(g.memberof);
-						var messages = [];
-						var msg = g._charts[c]._data;
 						var chart = {
 							'_chartId':g._charts[c]._chartId,
 							'_chartName':g._charts[c]._chartName,
@@ -481,30 +477,52 @@ exports.publish = function(taffyData, opts, tutorials) {
 							'_chartTitle':g._charts[c].title,
 							'_chartUrl':anUrl
 						};
-						// Add origin to messages & destination to entities
-						for (var prop in msg) {
-							msg[prop]._origin = g.memberof;
-							entities.push(msg[prop]._destination);
-						};
-						chart._entities = entities;
-						chart._messages = msg;
+						if (g._charts[c]._chartType == 'sequence') {
+						    entities.push(g.memberof);
+							var msg = g._charts[c]._data;
+							// Add origin to messages & destination to entities
+							for (var prop in msg) {
+								msg[prop]._origin = g.memberof;
+								entities.push(msg[prop]._destination);
+							};
+							chart._entities = entities;
+							chart._messages = msg;
+						} else if (g._charts[c]._chartType == 'class') {
+						    entities.push(g.name);
+						    var msg = g._charts[c]._inherits;
+							// Add parent to list of entities
+							for (var prop in msg) {
+								entities.push(msg[prop]._parent);
+							};
+							chart._entities = entities;
+						}
 						diagrams[g._charts[c]._chartType+"-"+g._charts[c]._chartId] = chart;
 					} else {
 					    // Existing chart
 						chart = diagrams[g._charts[c]._chartType+"-"+g._charts[c]._chartId] ;
-						if (chart._entities.indexOf(g.memberof) == -1)
-							chart._entities.push(g.memberof);
-						var msg = g._charts[c]._data;
-						// Add origin to messages & destination to entities
-						for (var prop in msg) {
-							msg[prop]._origin = g.memberof;
-							chart._entities.push(msg[prop]._destination);
-						};
-						for (var prop in msg) {
-							if (msg.hasOwnProperty(prop)) {
-								chart._messages[prop] = msg[prop];
-							}
-						};
+						if (g._charts[c]._chartType == 'sequence') {
+							if (chart._entities.indexOf(g.memberof) == -1)
+								chart._entities.push(g.memberof);
+							var msg = g._charts[c]._data;
+							// Add origin to messages & destination to entities
+							for (var prop in msg) {
+								msg[prop]._origin = g.memberof;
+								chart._entities.push(msg[prop]._destination);
+							};
+							for (var prop in msg) {
+								if (msg.hasOwnProperty(prop)) {
+									chart._messages[prop] = msg[prop];
+								}
+							};
+						} else if (g._charts[c]._chartType == 'class') {
+							if (chart._entities.indexOf(g.name) == -1)
+								chart._entities.push(g.name);
+							var msg = g._charts[c]._inherits;
+							// Add parent to list of entities
+							for (var prop in msg) {
+								entities.push(msg[prop]._parent);
+							};
+						}
 					}
 				};
             }
@@ -589,28 +607,46 @@ exports.publish = function(taffyData, opts, tutorials) {
 	// INIT: Diagrams code
 	function generateDiagram(title, diagram, filename) {
         // Generate content for sequences
-		var msg = diagram._messages;
-		var convertedString = "";
-		if (msg !== undefined) {	
-		    var size = Object.keys(msg).length;
-			for (var i = 0; i < size; i++) {
-				var m = msg[i+""];
-				var type = "->" ;
-				if (m._type == "callback") 
-					type = "-->"
-				var s = m._origin + type + m._destination + ": " + m._message + "\\n";
-				convertedString += s;
+		if (diagram._chartType == 'sequence') {
+			var msg = diagram._messages;
+			var convertedString = "";
+			if (msg !== undefined) {	
+				var size = Object.keys(msg).length;
+				for (var i = 0; i < size; i++) {
+					var m = msg[i+""];
+					var s = "";
+					if (m._type != "note") {
+						var type = "->" ;
+						if (m._type == "callback") 
+							type = "-->"						
+						s = m._origin + type + m._destination + ": " + m._message + "\\n";
+					} else {
+					    var location = m._location;
+						if (m._location == "right" || m._location == "left") 	
+							location = m._location + " of";
+						s = "Note "+ location +" "+m._origin+ ": " + m._message + "\\n";
+					}
+					convertedString += s;
+				};
 			};
-		};
-		var diagramData = {
-            title: title,
-            header: diagram._chartTitle,
-			//content: JSON.stringify(diagram)
-			content: convertedString
-        };      
-        var diagramPath = path.join(outdir, filename),
-            html = view.render('diagram.tmpl', diagramData);   			
-        fs.writeFileSync(diagramPath, html, 'utf8');
+			var diagramData = {
+				title: title,
+				header: diagram._chartTitle,
+				//content: JSON.stringify(diagram)
+				content: convertedString
+			};      
+			var diagramPath = path.join(outdir, filename), html = view.render('sequence-diagram.tmpl', diagramData);   			
+			fs.writeFileSync(diagramPath, html, 'utf8');
+		} else if (diagram._chartType == 'class') {
+			var diagramData = {
+				title: title,
+				header: diagram._chartTitle,
+				content: JSON.stringify(diagram)
+				//content: convertedString
+			};      
+			var diagramPath = path.join(outdir, filename), html = view.render('class-diagram.tmpl', diagramData);   			
+			fs.writeFileSync(diagramPath, html, 'utf8');
+		}
     } 
 	// END: Diagrams code
 	
