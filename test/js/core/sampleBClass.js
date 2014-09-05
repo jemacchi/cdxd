@@ -17,7 +17,7 @@ define([
     * @version 1.0
     * @author  Jose Macchi <jemacchi@yahoo.com.ar>
     * @params Object options options:{ [ el: id/class ][, template: ] [, effects: {...}]  } -> effects: jQuery UI effects.
-	* @cdxd.inherits ClassDiagram2 SampleCClass
+	* @cdxd.inherits ClassDiagram2 ExternalClass
     */
     var SampleBClass = Class.extend(
 	/** @lends SampleBClass.prototype */
@@ -32,6 +32,7 @@ define([
        * First call response.
 	   * @cdxd.callback SequenceDiagram1 2 SampleAClass 'Message 2'
 	   * @cdxd.call SequenceDiagram1 4 SampleCClass 'Message 4'
+	   * @cdxd.call SequenceDiagram1 6 SampleDClass 'Message 6'
        */
       firstResponse: function(fx) {
         return null;

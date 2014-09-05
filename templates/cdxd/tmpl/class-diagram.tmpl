@@ -5,7 +5,46 @@
 </header>  
 
 <article>
-	<div id="diagram"></div>
+	<div id="diagram" class="diagram"></div>
+    <?js= content ?>
+	<script type="text/javascript">
+	    var x = new joint.dia.Graph;
+		window.onload = function(){
+			var graph = x;	
+			var paper = new joint.dia.Paper({
+				el: $('#diagram'),
+				width: 800,
+				height: 600,
+				gridSize: 1,
+				model: graph
+			});	
+			var uml = joint.shapes.uml;	
+			
+			var entList = {};
+			var entities = JSON.parse('<?js= entities ?>');			
+			for (var elem in entities) {
+				var el;
+				if (entities[elem].type == 'class') {
+					el = new uml.Class( { position: entities[elem].position,
+									 size: entities[elem].size,
+									 name: entities[elem].name });
+				} else if (entities[elem].type == 'abstract') {
+					el = new uml.Abstract( { position: entities[elem].position,
+									 size: entities[elem].size,
+									 name: entities[elem].name });
+				};
+				entList[entities[elem].name] =  el;
+			};
+
+			_.each(entList, function(c) { graph.addCell(c); });
+
+			//var relations = [
+			//	new uml.Composition({ source: { id: classes.person.id }, target: { id: classes.bloodgroup.id }})
+			//];
+
+			//_.each(relations, function(r) { graph.addCell(r); });	
+		}
+    </script>	
 
 </article>
 

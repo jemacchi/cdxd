@@ -488,11 +488,19 @@ exports.publish = function(taffyData, opts, tutorials) {
 							chart._entities = entities;
 							chart._messages = msg;
 						} else if (g._charts[c]._chartType == 'class') {
-						    entities.push(g.name);
-						    var msg = g._charts[c]._inherits;
+						    var entity = {
+								'name': g.name,
+								'type': 'class'
+							};
+						    entities.push(entity);
+						    var msg = g._charts[c]._relations;
 							// Add parent to list of entities
 							for (var prop in msg) {
-								entities.push(msg[prop]._parent);
+								var anEntity = {
+									'name': msg[prop]._parent,
+									'type': msg[prop]._parentType
+								};
+								entities.push(anEntity);
 							};
 							chart._entities = entities;
 						}
@@ -515,12 +523,21 @@ exports.publish = function(taffyData, opts, tutorials) {
 								}
 							};
 						} else if (g._charts[c]._chartType == 'class') {
-							if (chart._entities.indexOf(g.name) == -1)
-								chart._entities.push(g.name);
-							var msg = g._charts[c]._inherits;
+							if (chart._entities.indexOf(g.name) == -1) {
+								var entity = {
+									'name': g.name,
+									'type': 'class'
+								};
+								chart._entities.push(entity);
+							}
+							var msg = g._charts[c]._relations;
 							// Add parent to list of entities
 							for (var prop in msg) {
-								entities.push(msg[prop]._parent);
+								var anEntity = {
+									'name': msg[prop]._parent,
+									'type': msg[prop]._parentType
+								};
+								chart._entities.push(anEntity);
 							};
 						}
 					}
@@ -632,17 +649,29 @@ exports.publish = function(taffyData, opts, tutorials) {
 			var diagramData = {
 				title: title,
 				header: diagram._chartTitle,
-				//content: JSON.stringify(diagram)
 				content: convertedString
 			};      
 			var diagramPath = path.join(outdir, filename), html = view.render('sequence-diagram.tmpl', diagramData);   			
 			fs.writeFileSync(diagramPath, html, 'utf8');
 		} else if (diagram._chartType == 'class') {
+			
+			var classes = {};
+			for (var elem in diagram._entities) {
+				var x = Math.floor((Math.random() * 400) + 1);
+				var y = Math.floor((Math.random() * 300) + 1);
+				classes[diagram._entities[elem].name] = {
+				    type: diagram._entities[elem].type ,
+					position: { x: x , y: y },
+					size: { width: 240, height: 100 },
+					name: diagram._entities[elem].name
+				};
+			}
+
 			var diagramData = {
 				title: title,
 				header: diagram._chartTitle,
-				content: JSON.stringify(diagram)
-				//content: convertedString
+				content: JSON.stringify(diagram),
+				entities: JSON.stringify(classes)
 			};      
 			var diagramPath = path.join(outdir, filename), html = view.render('class-diagram.tmpl', diagramData);   			
 			fs.writeFileSync(diagramPath, html, 'utf8');
