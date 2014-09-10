@@ -470,6 +470,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 						var anUrl = helper.getUniqueFilename(g._charts[c]._chartType+'-'+g._charts[c]._chartName);
 						helper.registerLink(g._charts[c]._chartType+'-'+g._charts[c]._chartName, anUrl);
 						var entities = [];
+						var relations = [];
 						var chart = {
 							'_chartId':g._charts[c]._chartId,
 							'_chartName':g._charts[c]._chartName,
@@ -488,21 +489,31 @@ exports.publish = function(taffyData, opts, tutorials) {
 							chart._entities = entities;
 							chart._messages = msg;
 						} else if (g._charts[c]._chartType == 'class') {
-						    var entity = {
+							var type = 'class';
+							if (g._charts[c]._entityType) 
+								type = g._charts[c]._entityType;
+							var entity = {
 								'name': g.name,
-								'type': 'class'
-							};
+								'type': type
+							};  
 						    entities.push(entity);
-						    var msg = g._charts[c]._relations;
+						    var rel = g._charts[c]._relations;
 							// Add parent to list of entities
-							for (var prop in msg) {
+							for (var prop in rel) {
 								var anEntity = {
-									'name': msg[prop]._parent,
-									'type': msg[prop]._parentType
+									'name': rel[prop]._target,
+									'type': rel[prop]._targetType
+								};
+								var aRel = {
+									'source': g.name,
+									'target': rel[prop]._target,
+									'type': rel[prop]._relationType
 								};
 								entities.push(anEntity);
+								relations.push(aRel);
 							};
 							chart._entities = entities;
+							chart._relations = relations;
 						}
 						diagrams[g._charts[c]._chartType+"-"+g._charts[c]._chartId] = chart;
 					} else {
@@ -524,20 +535,29 @@ exports.publish = function(taffyData, opts, tutorials) {
 							};
 						} else if (g._charts[c]._chartType == 'class') {
 							if (chart._entities.indexOf(g.name) == -1) {
+								var type = 'class';
+								if (g._charts[c]._entityType) 
+									type = g._charts[c]._entityType;
 								var entity = {
 									'name': g.name,
-									'type': 'class'
-								};
+									'type': type
+								};  
 								chart._entities.push(entity);
 							}
-							var msg = g._charts[c]._relations;
+							var rel = g._charts[c]._relations;
 							// Add parent to list of entities
-							for (var prop in msg) {
+							for (var prop in rel) {
 								var anEntity = {
-									'name': msg[prop]._parent,
-									'type': msg[prop]._parentType
+									'name': rel[prop]._target,
+									'type': rel[prop]._targetType
+								};
+								var aRel = {
+									'source': g.name,
+									'target': rel[prop]._target,
+									'type': rel[prop]._relationType
 								};
 								chart._entities.push(anEntity);
+								chart._relations.push(aRel);
 							};
 						}
 					}
@@ -661,16 +681,26 @@ exports.publish = function(taffyData, opts, tutorials) {
 				var y = Math.floor((Math.random() * 300) + 1);
 				classes[diagram._entities[elem].name] = {
 				    type: diagram._entities[elem].type ,
-					position: { x: x , y: y },
-					size: { width: 240, height: 100 },
+					position: { x: x , y: y } ,
+					size: { width: 240, height: 100 } ,
 					name: diagram._entities[elem].name
 				};
 			}
-
+			var relations = {};		
+			for (var elem in diagram._relations) {
+				var size = Object.keys(relations).length; 
+				relations[size] = {
+				    type: diagram._relations[elem].type ,
+					source: diagram._relations[elem].source ,					
+					target: diagram._relations[elem].target
+				};
+			}
+			
 			var diagramData = {
 				title: title,
 				header: diagram._chartTitle,
 				content: JSON.stringify(diagram),
+				relations: JSON.stringify(relations),
 				entities: JSON.stringify(classes)
 			};      
 			var diagramPath = path.join(outdir, filename), html = view.render('class-diagram.tmpl', diagramData);   			

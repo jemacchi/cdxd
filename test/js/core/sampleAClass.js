@@ -18,6 +18,10 @@ define([
     * @author  Jose Macchi <jemacchi@yahoo.com.ar>
     * @params Object options options:{ [ el: id/class ][, template: ] [, effects: {...}]  } -> effects: jQuery UI effects.
 	* @cdxd.inherits ClassDiagram1 SampleBClass
+	* @cdxd.class ClassDiagram2
+    * @cdxd.composedBy ClassDiagram1 CompositionSample abstract
+	* @cdxd.aggregatedWith ClassDiagram1 AggregationSample	
+	* @cdxd.associatedWith ClassDiagram1 AssociationSample	
     */
     var SampleAClass = Class.extend(
 	/** @lends SampleAClass.prototype */

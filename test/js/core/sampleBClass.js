@@ -17,7 +17,9 @@ define([
     * @version 1.0
     * @author  Jose Macchi <jemacchi@yahoo.com.ar>
     * @params Object options options:{ [ el: id/class ][, template: ] [, effects: {...}]  } -> effects: jQuery UI effects.
-	* @cdxd.inherits ClassDiagram2 ExternalClass
+	* @cdxd.inherits ClassDiagram2 ExternalClass abstract
+	* @cdxd.implements ClassDiagram2 ExternalInterface
+	* @cdxd.composedBy ClassDiagram2 CompositionClass
     */
     var SampleBClass = Class.extend(
 	/** @lends SampleBClass.prototype */
