@@ -4,8 +4,12 @@ cdxd
 A JSDoc Template &amp; Plugin to implement "Code Driven <X> Documentation" concepts (review it [here] (http://josemacchi.wordpress.com) ). Sorry, spanish for now !
 
 These plugin & template depends on:
-* [JSDoc](https://github.com/jsdoc3/jsdoc)
-* [js-sequence-diagrams] (http://bramp.github.io/js-sequence-diagrams/)
+* [JSDoc](https://github.com/jsdoc3/jsdoc) - Documentation base tool
+* [js-sequence-diagrams] (http://bramp.github.io/js-sequence-diagrams/) - For sequence diagrams implementation
+* [jointJS] (http://jointjs.com/) - For class diagrams implementation
+* [jointJS UML plugin](http://jointjs.com/downloads/joint.shapes.uml.js) - For class diagrams implementation
+* [jointJS DirectGraph plugin] (http://jointjs.com/downloads/joint.layout.DirectedGraph.js) - For autolayout implementation
+
 
 ## About
 
@@ -27,9 +31,10 @@ Tools included on this repo are :
 
 ## Demo
 
-This is a demo of template & plugin use, to get defined a simple sequence chart (based on doclets)
+This is a demo of template & plugin use, to get defined a simple sequence and class charts (based on doclets)
 
 * [Sequence Chart Demo] (http://cdxd.netne.net/sequence-SequenceDiagram1.html)
+* [Class Chart Demo] (http://cdxd.netne.net/class-ClassDiagram1.html)
 
 ## Installation
 
@@ -61,7 +66,14 @@ Once you have enabled the plugin, then you only need to call JSDoc as usual
 
 ## Basic Usage
 
-Currently only Sequence Diagrams are fully implemented, that means that you can use doclet @cdxd.call, @cdxd.callback & @cdxd.note on your code as this 
+Currently Sequence & Class Diagrams are fully implemented, that means that you can use doclets like
+
+* @cdxd.call, @cdxd.callback & @cdxd.note (for sequence diagrams) or 
+* @cdxd.class, @cdxd.interface, @cdxd.abstract, @cdxd.inherits, @cdxd.composedBy, @cdxd.aggregatedWith, @cdxd.associatedWith & @cdxd.implements (for class diagrams)
+
+### Sequence Diagrams
+
+Basic usage for sequence diagrams 
 
 ```javascript
 
@@ -81,7 +93,7 @@ Call's Implemented doclets:
 * @cdxd.call --> Call
 * @cdxd.callback --> Callback (dotted line)
 
-where doclets arguments are :
+where sequence diagram doclets arguments are :
 
 * diagram code (ie. SequenceDiagram1)
 * call order number  (ie. 3)
@@ -97,7 +109,39 @@ Params :
 * note location  (right|left|over)
 * message text (required to be enclosed in quotation marks) (ie. 'Message 2')
 
-Doclet assumes the entity source as the current memberof property of the doclet (that means that uses the class definition).
+
+### Class Diagrams
+
+Basic usage for class diagrams
+
+```javascript
+function(Inheritance, ko, $) {
+    'use strict';
+    /**
+    * This is a basic Sample Class.
+	* @class SampleAClass
+    * @version 1.0
+    * @author  Jose Macchi <jemacchi@yahoo.com.ar>
+    * @params Object options options:{ [ el: id/class ][, template: ] [, effects: {...}]  } -> effects: jQuery UI effects.
+	* @cdxd.inherits ClassDiagram1 SampleBClass
+	* @cdxd.class ClassDiagram2
+    * @cdxd.composedBy ClassDiagram1 CompositionSample abstract
+	* @cdxd.aggregatedWith ClassDiagram1 AggregationSample	
+	* @cdxd.associatedWith ClassDiagram1 AssociationSample	
+    */
+    var SampleAClass = Class.extend(
+```
+
+where class diagram doclets arguments are :
+* diagram code (ie. SequenceDiagram1)
+* related entity  (ie. CompositionSample)
+* optionally: related entity type  (ie. abstract)
+
+On some cases, like @cdxd.class, you only can set the Diagram code (since it's declaring the type of the element)
+
+### Common behavior
+
+Doclets assumes the entity source as the current memberof property of the doclet (that means that uses the class definition).
 Using doclet in this way, you can distribute a sequence diagram documentation throw the code as it's really invoked.
 
 ## Author
