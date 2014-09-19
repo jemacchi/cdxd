@@ -10,6 +10,7 @@ These plugin & template depends on:
 * [jointJS UML plugin](http://jointjs.com/downloads/joint.shapes.uml.js) - For class diagrams implementation
 * [jointJS DirectGraph plugin] (http://jointjs.com/downloads/joint.layout.DirectedGraph.js) - For autolayout implementation
 
+For now plugin&template are just a PoC that works and fullfil expectations. Soon we hope to completa our current roadmap (check bellow)
 
 ## About
 
@@ -148,6 +149,13 @@ Also you can add a diagram description with doclet:
 
 Doclets assumes the entity source as the current memberof property of the doclet (that means that uses the class definition).
 Using doclet in this way, you can distribute a sequence diagram documentation throw the code as it's really invoked.
+
+## Roadmap/ToDo
+
+* Create new demos (complete and well documented, ie. class patterns)
+* Refactor CDxD plugin (since for now it's just a PoC that works and fullfil expectations)
+* Document CDxD plugin and template with same template ! 
+* Provide a DOCLET user reference manual
 
 ## Author
 
