@@ -68,8 +68,8 @@ Once you have enabled the plugin, then you only need to call JSDoc as usual
 
 Currently Sequence & Class Diagrams are fully implemented, that means that you can use doclets like
 
-* @cdxd.call, @cdxd.callback & @cdxd.note (for sequence diagrams) or 
-* @cdxd.class, @cdxd.interface, @cdxd.abstract, @cdxd.inherits, @cdxd.composedBy, @cdxd.aggregatedWith, @cdxd.associatedWith & @cdxd.implements (for class diagrams)
+* @cdxd.seqdesc, @cdxd.call, @cdxd.callback & @cdxd.note (for sequence diagrams) or 
+* @cdxd.classdesc, @cdxd.class, @cdxd.interface, @cdxd.abstract, @cdxd.inherits, @cdxd.composedBy, @cdxd.aggregatedWith, @cdxd.associatedWith & @cdxd.implements (for class diagrams)
 
 ### Sequence Diagrams
 
@@ -102,6 +102,7 @@ where sequence diagram doclets arguments are :
 
 Or Notes implemented doclets:
 * @cdxd.note --> Add notes to defined entity 
+* @cdxd.seqdesc --> Diagram description (it's only to work in the context of a function/method declaration)
 
 Params :
 * diagram code (ie. SequenceDiagram1)
@@ -138,6 +139,10 @@ where class diagram doclets arguments are :
 * optionally: related entity type  (ie. abstract)
 
 On some cases, like @cdxd.class, you only can set the Diagram code (since it's declaring the type of the element)
+
+Also you can add a diagram description with doclet:
+
+* @cdxd.classdesc --> Diagram description (it's only to work in the context of a class declaration)
 
 ### Common behavior
 

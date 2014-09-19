@@ -1,5 +1,5 @@
 /**
-    @overview This is just an example.
+    @overview This plugin allows to add charts/diagrams on code side, using concept defined as {@link https://github.com/jemacchi/cdxd Code Driven Documentation}
     @module plugins/cdxd
     @author Jose Macchi <jemacchi@yahoo.com.ar>
  */
@@ -184,6 +184,23 @@ exports.defineTags = function(dictionary) {
 			doclet._charts["class-"+params[0]]._relations[size] = info;
 		}
 	});
+	dictionary.defineTag('cdxd.classdesc', {
+		onTagged: function(doclet, tag) {			    
+			var params = tag.value.split(" ");
+			var message = tag.value.substring(tag.value.indexOf("'"));
+			if (!doclet._charts) 
+				doclet._charts = {};
+			doclet._chartRelated = true;
+			if (!doclet._charts["class-"+params[0]]) {
+				doclet._charts["class-"+params[0]] = {
+					'_chartId': params[0],
+					'_chartName': params[0],
+					'_chartType': "class"
+				};
+			}
+			doclet._charts["class-"+params[0]]._chartDesc = message ;
+		}
+	});
 	// Sequence diagrams
 	dictionary.defineTag('cdxd.call', {
 		onTagged: function(doclet, tag) {	
@@ -235,7 +252,7 @@ exports.defineTags = function(dictionary) {
 			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
 		}
 	});
-	dictionary.defineTag('cdxd.note', {
+	dictionary.defineTag('cdxd.seqnote', {
 		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
@@ -260,4 +277,22 @@ exports.defineTags = function(dictionary) {
 			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
 		}
 	});
+	dictionary.defineTag('cdxd.seqdesc', {
+		onTagged: function(doclet, tag) {	
+			var params = tag.value.split(" ");
+			var message = tag.value.substring(tag.value.indexOf("'"));
+			if (!doclet._charts) 
+				doclet._charts = {};
+			doclet._chartRelated = true;
+			if (!doclet._charts["sequence-"+params[0]]) {
+				doclet._charts["sequence-"+params[0]] = {
+					'_chartId': params[0],
+					'_chartName': params[0],
+					'_chartType': "sequence",
+				};
+			}
+			doclet._charts["sequence-"+params[0]]._chartDesc = message ;
+		}
+	});
+
 }

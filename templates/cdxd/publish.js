@@ -464,9 +464,9 @@ exports.publish = function(taffyData, opts, tutorials) {
 		members.diagrams.forEach(function(g) {
 			// Generate all diagram files
             if ( g._chartRelated ) {
-				for(var c in g._charts){	
+				for(var c in g._charts){				
 					if (!diagrams[g._charts[c]._chartType+"-"+g._charts[c]._chartId]) {		
-					    // New chart
+					  // New chart
 						var anUrl = helper.getUniqueFilename(g._charts[c]._chartType+'-'+g._charts[c]._chartName);
 						helper.registerLink(g._charts[c]._chartType+'-'+g._charts[c]._chartName, anUrl);
 						var entities = [];
@@ -475,7 +475,8 @@ exports.publish = function(taffyData, opts, tutorials) {
 							'_chartId':g._charts[c]._chartId,
 							'_chartName':g._charts[c]._chartName,
 							'_chartType':g._charts[c]._chartType,
-							'_chartTitle':g._charts[c].title,
+							'_chartTitle':g._charts[c]._chartTitle,
+							'_chartDesc':g._charts[c]._chartDesc,
 							'_chartUrl':anUrl
 						};
 						if (g._charts[c]._chartType == 'sequence') {
@@ -519,6 +520,8 @@ exports.publish = function(taffyData, opts, tutorials) {
 					} else {
 					    // Existing chart
 						chart = diagrams[g._charts[c]._chartType+"-"+g._charts[c]._chartId] ;
+						if (g._charts[c]._chartDesc)
+							chart._chartDesc = g._charts[c]._chartDesc;						
 						if (g._charts[c]._chartType == 'sequence') {
 							if (chart._entities.indexOf(g.memberof) == -1)
 								chart._entities.push(g.memberof);
@@ -669,6 +672,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 			var diagramData = {
 				title: title,
 				header: diagram._chartTitle,
+				description: diagram._chartDesc,
 				content: convertedString
 			};      
 			var diagramPath = path.join(outdir, filename), html = view.render('sequence-diagram.tmpl', diagramData);   			
@@ -699,6 +703,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 			var diagramData = {
 				title: title,
 				header: diagram._chartTitle,
+				description: diagram._chartDesc,
 				content: JSON.stringify(diagram),
 				relations: JSON.stringify(relations),
 				entities: JSON.stringify(classes)
