@@ -1,1 +1,1 @@
-.\jsdoc --destination ".\reports\jsdoc"  -r .\test\
+.\jsdoc.cmd --destination ".\reports\jsdoc"  -r .\test\
