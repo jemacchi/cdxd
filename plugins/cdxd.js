@@ -4,21 +4,31 @@
     @author Jose Macchi <jemacchi@yahoo.com.ar>
  */
 exports.defineTags = function(dictionary) {
+
+	var ChartUtils = {
+		getCharts: function(doclet) {
+			if (!doclet._charts) 
+				doclet._charts = {};
+			return doclet._charts;
+		},
+		setEntityTypeOnChart: function(charts, preffix, name, type) {
+			if (!charts[preffix+name]) {
+				charts[preffix+name] = {
+					'_chartId': name,
+					'_chartName': name,
+					'_chartType': type,
+					'_entityType': type
+				};
+			};
+		}
+	};
 	// Class diagrams
 	dictionary.defineTag('cdxd.class', {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class",
-					'_entityType': "class"
-				};
-			};
+			ChartUtils.setEntityTypeOnChart(doclet._charts,"class",params[0],"class");
 		}
 	});
 	dictionary.defineTag('cdxd.interface', {
