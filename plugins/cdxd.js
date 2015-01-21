@@ -34,31 +34,17 @@ exports.defineTags = function(dictionary) {
 	dictionary.defineTag('cdxd.interface', {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class",
-					'_entityType': "interface"
-				};
-			};
+			ChartUtils.setEntityTypeOnChart(doclet._charts,"class",params[0],"interface");
 		}
 	});
 	dictionary.defineTag('cdxd.abstract', {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			doclet._charts["class-"+params[0]] = {
-				'_chartId': params[0],
-				'_chartName': params[0],
-				'_chartType': "class",
-				'_entityType': "abstract"				
-			};
+			ChartUtils.setEntityTypeOnChart(doclet._charts,"class",params[0],"abstract");
 		}
 	});
 	dictionary.defineTag('cdxd.implements', {
