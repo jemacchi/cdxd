@@ -51,8 +51,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
 			var type = 'interface';
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -78,8 +77,7 @@ exports.defineTags = function(dictionary) {
 			var type = 'class';
 			if (params[2]) 
 				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -105,8 +103,7 @@ exports.defineTags = function(dictionary) {
 			var type = 'class';
 			if (params[2]) 
 				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -132,8 +129,7 @@ exports.defineTags = function(dictionary) {
 			var type = 'class';
 			if (params[2]) 
 				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -159,8 +155,7 @@ exports.defineTags = function(dictionary) {
 			var type = 'class';
 			if (params[2]) 
 				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -184,8 +179,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {			    
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["class-"+params[0]]) {
 				doclet._charts["class-"+params[0]] = {
@@ -202,8 +196,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["sequence-"+params[0]]) {
 				doclet._charts["sequence-"+params[0]] = {
@@ -227,8 +220,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["sequence-"+params[0]]) {
 				doclet._charts["sequence-"+params[0]] = {
@@ -252,8 +244,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["sequence-"+params[0]]) {
 				doclet._charts["sequence-"+params[0]] = {
@@ -277,8 +268,7 @@ exports.defineTags = function(dictionary) {
 		onTagged: function(doclet, tag) {	
 			var params = tag.value.split(" ");
 			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
+			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			if (!doclet._charts["sequence-"+params[0]]) {
 				doclet._charts["sequence-"+params[0]] = {
