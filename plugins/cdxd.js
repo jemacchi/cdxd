@@ -11,13 +11,22 @@ exports.defineTags = function(dictionary) {
 				doclet._charts = {};
 			return doclet._charts;
 		},
-		setEntityTypeOnChart: function(charts, preffix, name, type) {
-			if (!charts[preffix+name]) {
-				charts[preffix+name] = {
+		setEntityTypeOnChart: function(charts, ctype, name, etype) {
+			if (!charts[ctype+'-'+name]) {
+				charts[ctype+'-'+name] = {
 					'_chartId': name,
 					'_chartName': name,
-					'_chartType': type,
-					'_entityType': type
+					'_chartType': ctype,
+					'_entityType': etype
+				};
+			};
+		},
+		setChartTypeOnChart: function(charts, ctype, name) {
+			if (!charts[ctype+'-'+name]) {
+				charts[ctype+'-'+name] = {
+					'_chartId': name,
+					'_chartName': name,
+					'_chartType': ctype
 				};
 			};
 		}
@@ -53,13 +62,7 @@ exports.defineTags = function(dictionary) {
 			var type = 'interface';
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			if (!doclet._charts["class-"+params[0]]._relations) 
 				doclet._charts["class-"+params[0]]._relations = {};
 			var info = {
@@ -79,13 +82,7 @@ exports.defineTags = function(dictionary) {
 				type = params[2];
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			if (!doclet._charts["class-"+params[0]]._relations) 
 				doclet._charts["class-"+params[0]]._relations = {};
 			var info = {
@@ -105,13 +102,7 @@ exports.defineTags = function(dictionary) {
 				type = params[2];
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			if (!doclet._charts["class-"+params[0]]._relations) 
 				doclet._charts["class-"+params[0]]._relations = {};
 			var info = {
@@ -131,13 +122,7 @@ exports.defineTags = function(dictionary) {
 				type = params[2];
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			if (!doclet._charts["class-"+params[0]]._relations) 
 				doclet._charts["class-"+params[0]]._relations = {};
 			var info = {
@@ -157,13 +142,7 @@ exports.defineTags = function(dictionary) {
 				type = params[2];
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			if (!doclet._charts["class-"+params[0]]._relations) 
 				doclet._charts["class-"+params[0]]._relations = {};
 			var info = {
@@ -181,13 +160,7 @@ exports.defineTags = function(dictionary) {
 			var message = tag.value.substring(tag.value.indexOf("'"));
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			}
+			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
 			doclet._charts["class-"+params[0]]._chartDesc = message ;
 		}
 	});
@@ -198,13 +171,7 @@ exports.defineTags = function(dictionary) {
 			var message = tag.value.substring(tag.value.indexOf("'"));
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
+			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			if (!doclet._charts["sequence-"+params[0]]._data) 
 				doclet._charts["sequence-"+params[0]]._data = {};
 			var msg = {
@@ -222,13 +189,7 @@ exports.defineTags = function(dictionary) {
 			var message = tag.value.substring(tag.value.indexOf("'"));
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
+			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			if (!doclet._charts["sequence-"+params[0]]._data) 
 				doclet._charts["sequence-"+params[0]]._data = {};
 			var msg = {
@@ -246,13 +207,7 @@ exports.defineTags = function(dictionary) {
 			var message = tag.value.substring(tag.value.indexOf("'"));
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
+			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			if (!doclet._charts["sequence-"+params[0]]._data) 
 				doclet._charts["sequence-"+params[0]]._data = {};
 			var msg = {
@@ -270,13 +225,7 @@ exports.defineTags = function(dictionary) {
 			var message = tag.value.substring(tag.value.indexOf("'"));
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence",
-				};
-			}
+			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			doclet._charts["sequence-"+params[0]]._chartDesc = message ;
 		}
 	});
