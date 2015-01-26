@@ -34,6 +34,15 @@ exports.defineTags = function(dictionary) {
 					'_chartType': ctype
 				};
 			};
+		},
+		addRelation: function(chartRelations, rtype, target, ttype) {
+			var info = {
+			        '_relationType': rtype,
+					'_target': target,
+					'_targetType': ttype
+			};
+			var size = Object.keys(chartRelations).length; 
+			chartRelations[size] = info;
 		}
 	};
 	// Class diagrams
@@ -48,17 +57,17 @@ exports.defineTags = function(dictionary) {
 	dictionary.defineTag('cdxd.interface', {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
-			doclet._charts = ChartUtils.getCharts(doclet);
+			var charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			ChartUtils.setEntityTypeOnChart(doclet._charts,"class",params[0],"interface");
+			ChartUtils.setEntityTypeOnChart(charts,"class",params[0],"interface");
 		}
 	});
 	dictionary.defineTag('cdxd.abstract', {
 		onTagged: function(doclet, tag) {
 			var params = tag.value.split(" ");
-			doclet._charts = ChartUtils.getCharts(doclet);
+			var charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
-			ChartUtils.setEntityTypeOnChart(doclet._charts,"class",params[0],"abstract");
+			ChartUtils.setEntityTypeOnChart(charts,"class",params[0],"abstract");
 		}
 	});
 	dictionary.defineTag('cdxd.implements', {
@@ -69,13 +78,7 @@ exports.defineTags = function(dictionary) {
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(charts,"class",params[0]);
 			var chartRelations = ChartUtils.getRelations(doclet,"class",params[0]);		
-			var info = {
-			        '_relationType': 'implementation',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(chartRelations).length; 
-			chartRelations[size] = info;
+			ChartUtils.addRelation(chartRelations,'implementation',params[1], type);			
 		}
 	});
 	dictionary.defineTag('cdxd.inherits', {
@@ -84,18 +87,17 @@ exports.defineTags = function(dictionary) {
 			var type = 'class';
 			if (params[2]) 
 				type = params[2];
-			doclet._charts = ChartUtils.getCharts(doclet);
+			var charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"class",params[0]);
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
+			var chartRelations = ChartUtils.getRelations(doclet,"class",params[0]);		
 			var info = {
 			        '_relationType': 'generalization',
 					'_target': params[1],
 					'_targetType': type
 			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			var size = Object.keys(chartRelations).length; 
+			chartRelations[size] = info;
 		}
 	});
 	dictionary.defineTag('cdxd.associatedWith', {
