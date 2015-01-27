@@ -16,6 +16,11 @@ exports.defineTags = function(dictionary) {
 				doclet._charts[ctype+'-'+name]._relations = {};
 			return doclet._charts[ctype+'-'+name]._relations;
 		},
+		getChartData: function(doclet, ctype, name) {
+			if (!doclet._charts[ctype+'-'+name]._data) 
+				doclet._charts[ctype+'-'+name]._data = {};
+			return doclet._charts[ctype+'-'+name]._data;
+		},
 		setEntityTypeOnChart: function(charts, ctype, name, etype) {
 			if (!charts[ctype+'-'+name]) {
 				charts[ctype+'-'+name] = {
@@ -151,8 +156,7 @@ exports.defineTags = function(dictionary) {
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
+			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
 			var msg = {
 					'_order': params[1],
 					'_message': message,
@@ -169,8 +173,7 @@ exports.defineTags = function(dictionary) {
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
+			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
 			var msg = {
 					'_order': params[1],
 					'_message': message,
@@ -187,8 +190,7 @@ exports.defineTags = function(dictionary) {
 			doclet._charts = ChartUtils.getCharts(doclet);
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
+			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
 			var msg = {
 					'_order': params[1],
 					'_message': message,
