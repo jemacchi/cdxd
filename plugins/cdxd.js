@@ -48,6 +48,15 @@ exports.defineTags = function(dictionary) {
 			};
 			var size = Object.keys(chartRelations).length; 
 			chartRelations[size] = info;
+		},
+		addChartData: function(chartData, order, message, destination, type) {
+			var msg = {
+					'_order': order,
+					'_message': message,
+					'_destination': destination,
+					'_type': type
+			};
+			chartData[order] = msg;
 		}
 	};
 	// Class diagrams
@@ -157,13 +166,7 @@ exports.defineTags = function(dictionary) {
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_destination': params[2],
-					'_type': 'call'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
+			ChartUtils.addChartData(chartData,params[1],message,params[2],'call');
 		}
 	});
 	dictionary.defineTag('cdxd.callback', {
@@ -174,13 +177,7 @@ exports.defineTags = function(dictionary) {
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_destination': params[2],
-					'_type': 'callback'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
+			ChartUtils.addChartData(chartData,params[1],message,params[2],'callback');
 		}
 	});
 	dictionary.defineTag('cdxd.seqnote', {
