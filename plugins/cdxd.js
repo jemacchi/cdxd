@@ -57,6 +57,15 @@ exports.defineTags = function(dictionary) {
 					'_type': type
 			};
 			chartData[order] = msg;
+		},
+		addNoteToSeqChart: function(chartData, order, message, position, type) {
+			var msg = {
+					'_order': order,
+					'_message': message,
+					'_location': position,
+					'_type': type
+			};
+			chartData[order] = msg;
 		}
 	};
 	// Class diagrams
@@ -188,13 +197,7 @@ exports.defineTags = function(dictionary) {
 			doclet._chartRelated = true;
 			ChartUtils.setChartTypeOnChart(doclet._charts,"sequence",params[0]);
 			var chartData = ChartUtils.getChartData(doclet,"sequence",params[0]);
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_location': params[2],
-					'_type': 'note'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
+			ChartUtils.addNoteToSeqChart(chartData,params[1],message,params[2],'note');
 		}
 	});
 	dictionary.defineTag('cdxd.seqdesc', {
