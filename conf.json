@@ -6,7 +6,7 @@
         "includePattern": ".+\\.js(doc)?$",
         "excludePattern": "(^|\\/|\\\\)_"
     },
-    "plugins": ["plugins/cdxd"],
+    "plugins": ["plugins/cdxd","plugins/cdxd-scrum"],
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": false,
