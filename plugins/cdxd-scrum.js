@@ -5,294 +5,49 @@
  */
 exports.defineTags = function(dictionary) {
 	// Class diagrams
-	dictionary.defineTag('cdxd.class', {
+	dictionary.defineTag('cdxd.userstory', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class",
-					'_entityType': "class"
-				};
-			};
+			
 		}
 	});
-	dictionary.defineTag('cdxd.interface', {
+	dictionary.defineTag('cdxd.usdesc', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class",
-					'_entityType': "interface"
-				};
-			};
+			
 		}
 	});
-	dictionary.defineTag('cdxd.abstract', {
+	dictionary.defineTag('cdxd.log', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			doclet._charts["class-"+params[0]] = {
-				'_chartId': params[0],
-				'_chartName': params[0],
-				'_chartType': "class",
-				'_entityType': "abstract"				
-			};
+						
 		}
 	});
-	dictionary.defineTag('cdxd.implements', {
+	dictionary.defineTag('cdxd.task', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			var type = 'interface';
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
-			var info = {
-			        '_relationType': 'implementation',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			
 		}
 	});
-	dictionary.defineTag('cdxd.inherits', {
+	dictionary.defineTag('cdxd.taskdesc', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			var type = 'class';
-			if (params[2]) 
-				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
-			var info = {
-			        '_relationType': 'generalization',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			
 		}
 	});
-	dictionary.defineTag('cdxd.associatedWith', {
+	dictionary.defineTag('cdxd.testcase', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			var type = 'class';
-			if (params[2]) 
-				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
-			var info = {
-			        '_relationType': 'association',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			
 		}
 	});
-	dictionary.defineTag('cdxd.composedBy', {
+	dictionary.defineTag('cdxd.testcase-step', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			var type = 'class';
-			if (params[2]) 
-				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
-			var info = {
-			        '_relationType': 'composition',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			
 		}
 	});
-	dictionary.defineTag('cdxd.aggregatedWith', {
+	dictionary.defineTag('cdxd.test', {
 		onTagged: function(doclet, tag) {
-			var params = tag.value.split(" ");
-			var type = 'class';
-			if (params[2]) 
-				type = params[2];
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			};
-			if (!doclet._charts["class-"+params[0]]._relations) 
-				doclet._charts["class-"+params[0]]._relations = {};
-			var info = {
-			        '_relationType': 'aggregation',
-					'_target': params[1],
-					'_targetType': type
-			};
-			var size = Object.keys(doclet._charts["class-"+params[0]]._relations).length; 
-			doclet._charts["class-"+params[0]]._relations[size] = info;
+			
 		}
 	});
-	dictionary.defineTag('cdxd.classdesc', {
+	dictionary.defineTag('cdxd.sprint', {
 		onTagged: function(doclet, tag) {			    
-			var params = tag.value.split(" ");
-			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["class-"+params[0]]) {
-				doclet._charts["class-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "class"
-				};
-			}
-			doclet._charts["class-"+params[0]]._chartDesc = message ;
+			
 		}
 	});
-	// Sequence diagrams
-	dictionary.defineTag('cdxd.call', {
-		onTagged: function(doclet, tag) {	
-			var params = tag.value.split(" ");
-			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_destination': params[2],
-					'_type': 'call'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
-		}
-	});
-	dictionary.defineTag('cdxd.callback', {
-		onTagged: function(doclet, tag) {	
-			var params = tag.value.split(" ");
-			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_destination': params[2],
-					'_type': 'callback'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
-		}
-	});
-	dictionary.defineTag('cdxd.seqnote', {
-		onTagged: function(doclet, tag) {	
-			var params = tag.value.split(" ");
-			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence"
-				};
-			}
-			if (!doclet._charts["sequence-"+params[0]]._data) 
-				doclet._charts["sequence-"+params[0]]._data = {};
-			var msg = {
-					'_order': params[1],
-					'_message': message,
-					'_location': params[2],
-					'_type': 'note'
-			};
-			doclet._charts["sequence-"+params[0]]._data[params[1]] = msg;
-		}
-	});
-	dictionary.defineTag('cdxd.seqdesc', {
-		onTagged: function(doclet, tag) {	
-			var params = tag.value.split(" ");
-			var message = tag.value.substring(tag.value.indexOf("'"));
-			if (!doclet._charts) 
-				doclet._charts = {};
-			doclet._chartRelated = true;
-			if (!doclet._charts["sequence-"+params[0]]) {
-				doclet._charts["sequence-"+params[0]] = {
-					'_chartId': params[0],
-					'_chartName': params[0],
-					'_chartType': "sequence",
-				};
-			}
-			doclet._charts["sequence-"+params[0]]._chartDesc = message ;
-		}
-	});
-
 }
