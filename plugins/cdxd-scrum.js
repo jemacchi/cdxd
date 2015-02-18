@@ -4,7 +4,13 @@
     @author Jose Macchi <jemacchi@yahoo.com.ar>
  */
 exports.defineTags = function(dictionary) {
-	// Class diagrams
+	// Project annotations
+	dictionary.defineTag('cdxd.project', {
+		onTagged: function(doclet, tag) {
+			
+		}
+	});
+	// Scrum annotations
 	dictionary.defineTag('cdxd.userstory', {
 		onTagged: function(doclet, tag) {
 			
