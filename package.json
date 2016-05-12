@@ -1,0 +1,21 @@
+{
+  "name": "jsdoc-cdxd",
+  "version": "0.2.0",
+  "description": "JsDoc Plugin and Template with CDXD features",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jemacchi/cdxd.git"
+  },
+  "scripts": {
+    "test": "./run-test.bat"
+  },
+  "author": {
+    "name": "Jose Macchi",
+    "email": "jose.macchi@gmail.com"
+  },
+  "license": "GNU",
+  "dependencies": {
+    "jsdoc": "3.3.2"
+  }
+}
