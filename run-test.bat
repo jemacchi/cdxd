@@ -1,1 +1,1 @@
-.\jsdoc.cmd --destination ".\reports\jsdoc"  -r .\test\
+node './node_modules/jsdoc/jsdoc.js' -c 'conf.json' --destination ".\reports\jsdoc" -r \test
