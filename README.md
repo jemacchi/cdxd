@@ -34,8 +34,8 @@ Tools included on this repo are :
 
 This is a demo of template & plugin use, to get defined a simple sequence and class charts (based on doclets)
 
-* [Sequence Chart Demo] (http://cdxd.site90.com/sequence-SequenceDiagram1.html)
-* [Class Chart Demo] (http://cdxd.site90.com/class-ClassDiagram1.html)
+* [Sequence Chart Demo] (http://jemacchi.github.io/cdxd/reports/jsdoc/sequence-SequenceDiagram1.html)
+* [Class Chart Demo] (http://jemacchi.github.io/cdxd/reports/jsdoc/class-ClassDiagram1.html)
 
 ## Installation
 
